@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import wizeline.crypto.currency.databinding.ActivityMainBinding
 import wizeline.crypto.currency.ui.homeCurrency.adapters.AvailableBooksAdapter
@@ -40,10 +41,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        homeViewModel.getAvailableBook()
+        homeViewModel.getAvailableBook("")
 
         homeViewModel.state.observe(this) { uiState ->
             avilableAdapter.submitList(uiState.book)
+
+            if (!uiState.error.isNullOrEmpty())
+                Snackbar.make(binding.root, "${uiState.error}", Snackbar.LENGTH_SHORT).show()
         }
 
     }

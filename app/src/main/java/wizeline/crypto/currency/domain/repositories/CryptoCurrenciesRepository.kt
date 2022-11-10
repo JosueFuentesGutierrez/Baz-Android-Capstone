@@ -1,16 +1,18 @@
 package wizeline.crypto.currency.domain.repositories
 
-import wizeline.crypto.currency.data.models.AvailableBooksDto
+
+import kotlinx.coroutines.flow.Flow
 import wizeline.crypto.currency.domain.model.AvailableBooksModel
-import wizeline.crypto.currency.domain.model.OrderbookModel
+import wizeline.crypto.currency.domain.model.OrderBookModel
 import wizeline.crypto.currency.domain.model.TradingInformationModel
+import wizeline.crypto.currency.data.Result
 
 interface CryptoCurrenciesRepository {
 
-    suspend fun getAvailableBooks(): List<AvailableBooksModel>
+    suspend fun getAvailableBooks(): Flow<Result<List<AvailableBooksModel>>>
 
-    suspend fun getInformationTrading(book:String): TradingInformationModel
+    suspend fun getInformationTrading(book:String): Flow<Result<TradingInformationModel>>
 
-    suspend fun getOrderBook(book:String): OrderbookModel
+    suspend fun getOrderBook(book:String): Flow<Result<OrderBookModel>>
 
 }

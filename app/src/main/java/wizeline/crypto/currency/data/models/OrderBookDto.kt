@@ -1,15 +1,15 @@
 package wizeline.crypto.currency.data.models
 
-import wizeline.crypto.currency.domain.model.OrderbookModel
+import wizeline.crypto.currency.domain.model.OrderBookModel
 import wizeline.crypto.currency.domain.model.AsksBidsModel
 
 
 data class OrderBookDto(
     val success: Boolean,
-    val payload: PayLoadOrderBook
+    val payload: PayLoadOrderBookDto
 )
 
-fun OrderBookDto.toListOrderBook(): OrderbookModel{
+fun OrderBookDto.toListOrderBook(): OrderBookModel{
     val askList = payload.asks?.map {
         AsksBidsModel(
             amount = it.amount,
@@ -26,7 +26,7 @@ fun OrderBookDto.toListOrderBook(): OrderbookModel{
         )
     }?.toList()
 
-    return OrderbookModel(
+    return OrderBookModel(
         asks = askList ?: emptyList(),
         bids = bidList ?: emptyList()
     )

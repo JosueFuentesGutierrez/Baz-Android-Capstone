@@ -17,11 +17,8 @@ class OrderBookAdapter():ListAdapter<AsksBidsModel, OrderBookAdapter.ViewHolder>
     DelegateDiffCallBack
 ) {
 
-    private lateinit var context:Context
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context=parent.context
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.asks_bids_adapter,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.asks_bids_adapter_constrain,parent,false)
         return ViewHolder(view)
     }
 
@@ -29,8 +26,8 @@ class OrderBookAdapter():ListAdapter<AsksBidsModel, OrderBookAdapter.ViewHolder>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data=getItem(position)
         holder.binding.apply {
-            txtAmount.text="${context.getString(R.string.amount)}\n${data.amount}"
-            textPrice.text="${context.getString(R.string.price)}\n${data.price}"
+            txtAmount.text="${root.context.getString(R.string.amount)}\n${data.amount}"
+            textPrice.text="${root.context.getString(R.string.price)}\n${data.price}"
         }
     }
 

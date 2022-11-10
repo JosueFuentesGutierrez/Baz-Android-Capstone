@@ -18,11 +18,9 @@ class AvailableBooksAdapter(private val onClick:(AvailableBooksModel)->Unit):Lis
     DelegateDiffCallBack
 ) {
 
-    private lateinit var context:Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context=parent.context
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.available_books_adapter,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.available_books_adapter_constrain,parent,false)
         return ViewHolder(view)
     }
 
@@ -34,8 +32,8 @@ class AvailableBooksAdapter(private val onClick:(AvailableBooksModel)->Unit):Lis
             txtCurrencyName.text=NAME_CURRENCY[currencyPrincipal[0]]
             txtMinimumPrice.text="${dataCurrency.minimumPrice} ${currencyPrincipal[1]}"
             txtMaximumPrice.text="${dataCurrency.maximumPrice} ${currencyPrincipal[1]}"
-            imgMoney.setImageDrawable(getDrawable(context,"ic_${currencyPrincipal[0]}"))
-            imgMoneyTo.setImageDrawable(getDrawable(context,"ic_${currencyPrincipal[1]}"))
+            imgMoney.setImageDrawable(getDrawable(root.context,"ic_${currencyPrincipal[0]}"))
+            imgMoneyTo.setImageDrawable(getDrawable(root.context,"ic_${currencyPrincipal[1]}"))
             txtCurrencyNameTo.text=NAME_CURRENCY[currencyPrincipal[1]]
             root.setOnClickListener {
                 onClick(dataCurrency)

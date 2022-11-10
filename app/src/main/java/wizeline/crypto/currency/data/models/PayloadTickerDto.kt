@@ -12,5 +12,6 @@ data class PayloadTickerDto (
     val wap  :    String?=null,
     val ask   :     String?=null,
     val bid   :     String?=null,
-    val created_at: String?=null
+    @SerializedName("created_at")
+    val createdAt: String?=null
 )

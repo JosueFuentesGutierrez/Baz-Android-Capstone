@@ -17,26 +17,29 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     val state = MutableLiveData(HomeState(isLoading = true))
 
-    init {}
-
-     fun getAvailableBook() {
+    fun getAvailableBook(search: String) {
         viewModelScope.launch {
 
-            availableBookUseCase().onEach { result ->
-             when (result) {
+            availableBookUseCase(search).onEach { result ->
+                when (result) {
                     is Result.Success -> {
-                        state.value= state.value?.copy(
-                                book = result.data ?: emptyList(),
-                                isLoading = false)
-                    }
-                    is Result.Error -> {
-                        state.value= state.value?.copy(
-                                isLoading = false
+                        state.value = state.value?.copy(
+                            book = result.data ?: emptyList(),
+                            error="",
+                            isLoading = false
                         )
                     }
-                    is Result.Loading->{
-                        state.value= state.value?.copy(
-                                isLoading = true
+                    is Result.Error -> {
+                        state.value = state.value?.copy(
+                            isLoading = false,
+                            book = result.data ?: emptyList(),
+                            error    = result?.message?:""
+                        )
+                    }
+                    is Result.Loading -> {
+                        state.value = state.value?.copy(
+                            isLoading = true,
+                            error    = result?.message?:""
                         )
                     }
                 }
