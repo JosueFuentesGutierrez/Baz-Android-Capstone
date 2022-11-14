@@ -34,7 +34,7 @@ class TradingInformationViewModel @Inject constructor(
                     is Result.Error -> {
                         state.value = state.value?.copy(
                             orderBook = result.data?: OrderBookModel(),
-                            error = result?.message?:"",
+                            error = result?.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
                             isLoading = false)
 
                     }
@@ -56,21 +56,22 @@ class TradingInformationViewModel @Inject constructor(
                 when (result) {
                     is Result.Success -> {
                             state.value = state.value?.copy(
-                                information = result.data?: TradingInformationModel(",","","","","","","","",""),
+                                information = result.data?: TradingInformationModel(),
                                 error = "",
                                 isLoading = false)
 
                     }
                     is Result.Error -> {
                         state.value= state.value?.copy(
-                            information = result.data?: TradingInformationModel(",","","","","","","","",""),
-                            error = result.message?:"",
+                            information = result.data?: TradingInformationModel(),
+                            error = result.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
                             isLoading = false
                         )
                     }
                     is Result.Loading->{
                         state.value= state.value?.copy(
-                            isLoading = true
+                            isLoading = true,
+                            error = ""
                         )
                     }
                 }

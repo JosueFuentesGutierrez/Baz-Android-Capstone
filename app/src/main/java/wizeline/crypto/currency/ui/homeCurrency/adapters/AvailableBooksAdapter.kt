@@ -1,7 +1,6 @@
 package wizeline.crypto.currency.ui.homeCurrency.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ class AvailableBooksAdapter(private val onClick:(AvailableBooksModel)->Unit):Lis
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.available_books_adapter_constrain,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_books_constrain,parent,false)
         return ViewHolder(view)
     }
 

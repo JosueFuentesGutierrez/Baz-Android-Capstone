@@ -1,7 +1,6 @@
 package wizeline.crypto.currency.ui.informationTrading.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ class OrderBookAdapter():ListAdapter<AsksBidsModel, OrderBookAdapter.ViewHolder>
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.asks_bids_adapter_constrain,parent,false)
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_asks_bids_constrain,parent,false)
         return ViewHolder(view)
     }
 

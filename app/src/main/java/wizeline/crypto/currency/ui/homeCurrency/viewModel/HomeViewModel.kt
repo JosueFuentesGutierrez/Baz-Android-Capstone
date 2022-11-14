@@ -1,5 +1,10 @@
 package wizeline.crypto.currency.ui.homeCurrency.viewModel
 
+
+import android.content.res.loader.ResourcesProvider
+import android.content.res.loader.ResourcesProvider.*
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,7 +14,9 @@ import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import wizeline.crypto.currency.R
 import wizeline.crypto.currency.data.Result
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -33,13 +40,13 @@ class HomeViewModel @Inject constructor(
                         state.value = state.value?.copy(
                             isLoading = false,
                             book = result.data ?: emptyList(),
-                            error    = result?.message?:""
+                            error    = result?.message?:"Error inesperado, revisa tu conexión y vuelve a intentar"
                         )
                     }
                     is Result.Loading -> {
                         state.value = state.value?.copy(
                             isLoading = true,
-                            error    = result?.message?:""
+                            error    = ""
                         )
                     }
                 }

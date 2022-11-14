@@ -6,14 +6,10 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
-
     <string name="minimum">Minimo</string>
     <string name="maximum">Maximo</string>
-
     <string name="sTo"> a </string>
     <string name="svolume">Volumen de las últimas 24 horas:</string>
     <string name="shigh">Precio alto en las últimas 24 horas :</string>
