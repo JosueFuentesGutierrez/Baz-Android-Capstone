@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="14dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginRight="14dp"
+    android:layout_marginBottom="7dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/txtCurrencyName"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/minimum"
+            app:layout_constraintEnd_toStartOf="@+id/imgMoneyTo"
+            app:layout_constraintStart_toEndOf="@+id/imgMoney"
+            app:layout_constraintTop_toBottomOf="@+id/txtCurrencyName" />
+
+        <TextView
+            android:id="@+id/txt_minimum_price"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/imgMoneyTo"
+            app:layout_constraintStart_toEndOf="@+id/imgMoney"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/maximum"
+            app:layout_constraintEnd_toStartOf="@+id/imgMoneyTo"
+            app:layout_constraintStart_toEndOf="@+id/imgMoney"
+            app:layout_constraintTop_toBottomOf="@+id/txt_minimum_price" />
+
+        <TextView
+            android:id="@+id/txt_maximum_price"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/imgMoneyTo"
+            app:layout_constraintStart_toEndOf="@+id/imgMoney"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/txtCurrencyNameTo"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            app:layout_constraintTop_toBottomOf="@+id/txt_maximum_price" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMoney"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_btc"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_maximum_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCurrencyName" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMoneyTo"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_btc"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_maximum_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCurrencyName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

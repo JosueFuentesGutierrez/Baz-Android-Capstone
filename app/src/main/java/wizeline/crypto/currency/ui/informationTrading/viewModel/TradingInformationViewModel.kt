@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import wizeline.crypto.currency.data.Result
+import wizeline.crypto.currency.domain.model.OrderBookModel
+import wizeline.crypto.currency.domain.model.TradingInformationModel
 import wizeline.crypto.currency.domain.useCase.OrderBookUseCase
 import wizeline.crypto.currency.domain.useCase.TradingInformationUseCase
 import wizeline.crypto.currency.ui.informationTrading.TradingState
@@ -19,33 +21,30 @@ class TradingInformationViewModel @Inject constructor(
 ) : ViewModel() {
     val state = MutableLiveData(TradingState(isLoading = true))
 
-    init {}
-
     fun getOrderBook(book:String){
         viewModelScope.launch {
             orderBookUseCase(book).onEach { result->
                 when (result) {
                     is Result.Success -> {
-                        state.value= result.data?.let {
-                            state.value?.copy(
-                                orderBook = it,
-                                isLoading = false)
-                        }
+                        state.value = state.value?.copy(
+                            orderBook = result.data?: OrderBookModel(),
+                            error = "",
+                            isLoading = false)
                     }
                     is Result.Error -> {
-                        state.value= state.value?.copy(
-                            isLoading = false
-                        )
+                        state.value = state.value?.copy(
+                            orderBook = result.data?: OrderBookModel(),
+                            error = result?.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
+                            isLoading = false)
+
                     }
                     is Result.Loading->{
                         state.value= state.value?.copy(
-                            isLoading = true
+                            isLoading = true,
+                            error = "",
                         )
                     }
                 }
-
-
-
             }.launchIn(viewModelScope)
 
         }
@@ -56,20 +55,23 @@ class TradingInformationViewModel @Inject constructor(
             tradingInformationUseCase(book).onEach { result ->
                 when (result) {
                     is Result.Success -> {
-                        state.value= result.data?.let {
-                            state.value?.copy(
-                                information = it,
+                            state.value = state.value?.copy(
+                                information = result.data?: TradingInformationModel(),
+                                error = "",
                                 isLoading = false)
-                        }
+
                     }
                     is Result.Error -> {
                         state.value= state.value?.copy(
+                            information = result.data?: TradingInformationModel(),
+                            error = result.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
                             isLoading = false
                         )
                     }
                     is Result.Loading->{
                         state.value= state.value?.copy(
-                            isLoading = true
+                            isLoading = true,
+                            error = ""
                         )
                     }
                 }
