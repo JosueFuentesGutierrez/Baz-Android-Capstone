@@ -25,21 +25,21 @@ class TradingInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         book = intent.getStringExtra("book") ?: ""
-
-
         binding = ActivityTradingInformationConstrainBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
 
         binding.apply {
 
-           rcvAsks.apply {
+            rcvAsks.apply {
                 adapter = asksAdapter
-                layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
             }
 
-           rcvBids.apply {
+            rcvBids.apply {
                 adapter = bidsAdapter
-                layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
             }
 
             val currencyPrincipal = book.split("_")
@@ -53,9 +53,6 @@ class TradingInformationActivity : AppCompatActivity() {
                     applicationContext, "ic_${currencyPrincipal[1]}"
                 )
             )
-
-
-
         }
 
         tradingViewModel.state.observe(this) { uiState ->
@@ -76,9 +73,6 @@ class TradingInformationActivity : AppCompatActivity() {
             if (uiState.error.isNotEmpty())
                 Snackbar.make(binding.root, uiState.error, Snackbar.LENGTH_SHORT).show()
         }
-
-
-
         tradingViewModel.getTradingInformation(book)
         tradingViewModel.getOrderBook(book)
     }

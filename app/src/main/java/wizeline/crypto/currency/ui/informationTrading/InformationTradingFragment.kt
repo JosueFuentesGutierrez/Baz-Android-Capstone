@@ -91,7 +91,7 @@ class InformationTradingFragment : Fragment() {
             if (uiState.error.isNotEmpty())
                 Snackbar.make(binding.root, uiState.error, Snackbar.LENGTH_SHORT).show()
         }
-        tradingViewModel.getTradingInformation(book)
+        tradingViewModel.getTradingInformationRXJ(book)
         tradingViewModel.getOrderBook(book)
     }
 }
