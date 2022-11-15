@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import wizeline.crypto.currency.R
-import wizeline.crypto.currency.databinding.AvailableBooksAdapterBinding
+import wizeline.crypto.currency.databinding.ItemBooksBinding
 import wizeline.crypto.currency.domain.model.AvailableBooksModel
 import wizeline.crypto.currency.utils.NAME_CURRENCY
 import wizeline.crypto.currency.utils.getDrawable
@@ -43,7 +43,7 @@ class AvailableBooksAdapter(private val onClick:(AvailableBooksModel)->Unit):Lis
 
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val binding = AvailableBooksAdapterBinding.bind(itemView)
+        val binding =  ItemBooksBinding.bind(itemView)
 
     }
 

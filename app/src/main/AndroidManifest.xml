@@ -11,15 +11,13 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoCurrency"
         tools:targetApi="31">
         <activity
-            android:name=".ui.homeCurrency.MainActivity"
+            android:name=".ui.NavigationActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.CryptoCurrency.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,14 +29,17 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".ui.homeCurrency.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CryptoCurrency.NoActionBar">
+        </activity>
 
         <activity
             android:name=".ui.informationTrading.TradingInformationActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.CryptoCurrency.NoActionBar">
         </activity>
-
 
     </application>
 
