@@ -1,6 +1,6 @@
-
 package wizeline.crypto.currency.data.resource.remote
 
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 import wizeline.crypto.currency.data.models.AvailableBooksDto
@@ -18,7 +18,8 @@ interface CryptoCurrenciesApi {
     @GET("order_book/")
     suspend fun getOrderBook(@Query("book")book:String): OrderBookDto
 
-
+    @GET("ticker/")
+    fun getInformationTradingRXJ(@Query("book")book:String): Single<TickerDto>
 
 }
 

@@ -28,5 +28,7 @@
 
     <string name="asks">Lista de solicitudes abiertas:</string>
     <string name="bids">Lista de ofertas abiertas:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

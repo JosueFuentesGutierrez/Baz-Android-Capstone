@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import wizeline.crypto.currency.R
-import wizeline.crypto.currency.databinding.AsksBidsAdapterBinding
+import wizeline.crypto.currency.databinding.ItemAsksBidsBinding
 import wizeline.crypto.currency.domain.model.AsksBidsModel
 
 
@@ -33,7 +33,7 @@ class OrderBookAdapter():ListAdapter<AsksBidsModel, OrderBookAdapter.ViewHolder>
 
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val binding = AsksBidsAdapterBinding .bind(itemView)
+        val binding =  ItemAsksBidsBinding.bind(itemView)
     }
 
     object DelegateDiffCallBack:DiffUtil.ItemCallback<AsksBidsModel>(){

@@ -10,4 +10,7 @@ interface InformationTradingDao {
 
     @Query("SELECT * FROM tickerEntity WHERE book = :book")
     suspend fun getInformation(book:String): TickerEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertInformationRXJ(information:TickerEntity)
 }

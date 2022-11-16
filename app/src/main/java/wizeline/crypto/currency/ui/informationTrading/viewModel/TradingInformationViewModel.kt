@@ -1,10 +1,12 @@
 package wizeline.crypto.currency.ui.informationTrading.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import wizeline.crypto.currency.data.Result
@@ -19,27 +21,32 @@ class TradingInformationViewModel @Inject constructor(
     private val tradingInformationUseCase: TradingInformationUseCase,
     private val orderBookUseCase: OrderBookUseCase
 ) : ViewModel() {
-    val state = MutableLiveData(TradingState(isLoading = true))
 
-    fun getOrderBook(book:String){
+    private val _state = MutableLiveData(TradingState(isLoading = true))
+    val state: LiveData<TradingState> = _state
+
+    fun getOrderBook(book: String) {
         viewModelScope.launch {
-            orderBookUseCase(book).onEach { result->
+            orderBookUseCase(book).onEach { result ->
                 when (result) {
                     is Result.Success -> {
-                        state.value = state.value?.copy(
-                            orderBook = result.data?: OrderBookModel(),
+                        _state.value = _state.value?.copy(
+                            orderBook = result.data ?: OrderBookModel(),
                             error = "",
-                            isLoading = false)
+                            isLoading = false
+                        )
                     }
                     is Result.Error -> {
-                        state.value = state.value?.copy(
-                            orderBook = result.data?: OrderBookModel(),
-                            error = result?.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
-                            isLoading = false)
+                        _state.value = _state.value?.copy(
+                            orderBook = result.data ?: OrderBookModel(),
+                            error = result?.message
+                                ?: "Error inesperado, revisa tu conexión y vuelve a intentar",
+                            isLoading = false
+                        )
 
                     }
-                    is Result.Loading->{
-                        state.value= state.value?.copy(
+                    is Result.Loading -> {
+                        _state.value = _state.value?.copy(
                             isLoading = true,
                             error = "",
                         )
@@ -50,32 +57,56 @@ class TradingInformationViewModel @Inject constructor(
         }
     }
 
-    fun getTradingInformation(book:String) {
+    fun getTradingInformation(book: String) {
         viewModelScope.launch {
             tradingInformationUseCase(book).onEach { result ->
                 when (result) {
                     is Result.Success -> {
-                            state.value = state.value?.copy(
-                                information = result.data?: TradingInformationModel(),
-                                error = "",
-                                isLoading = false)
+                        _state.value = _state.value?.copy(
+                            information = result.data ?: TradingInformationModel(),
+                            error = "",
+                            isLoading = false
+                        )
 
                     }
                     is Result.Error -> {
-                        state.value= state.value?.copy(
-                            information = result.data?: TradingInformationModel(),
-                            error = result.message?:"Error inesperado, revisa tu conexión y vuelve a intentar",
+                        _state.value = _state.value?.copy(
+                            information = result.data ?: TradingInformationModel(),
+                            error = result.message
+                                ?: "Error inesperado, revisa tu conexión y vuelve a intentar",
                             isLoading = false
                         )
                     }
-                    is Result.Loading->{
-                        state.value= state.value?.copy(
+                    is Result.Loading -> {
+                        _state.value = _state.value?.copy(
                             isLoading = true,
                             error = ""
                         )
                     }
                 }
             }.launchIn(viewModelScope)
+        }
+    }
+
+    fun getTradingInformationRXJ(book: String) {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            val resTradingInformation = tradingInformationUseCase.invokeRXJ(book)
+            resTradingInformation.observeOn(AndroidSchedulers.mainThread()).subscribe(
+                { result ->
+                    _state.value = _state.value?.copy(
+                        information = result ?: TradingInformationModel(),
+                        error = "",
+                        isLoading = false
+                    )
+                },{
+                    _state.value = _state.value?.copy(
+
+                        error = it.message ?: "Error inesperado, revisa tu conexión y vuelve a intentar",
+                        isLoading = false
+                    )
+                }
+            )
         }
     }
 

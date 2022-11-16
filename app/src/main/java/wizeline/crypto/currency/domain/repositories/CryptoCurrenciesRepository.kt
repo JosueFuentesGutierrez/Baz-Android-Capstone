@@ -1,6 +1,6 @@
 package wizeline.crypto.currency.domain.repositories
 
-
+import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import wizeline.crypto.currency.domain.model.AvailableBooksModel
 import wizeline.crypto.currency.domain.model.OrderBookModel
@@ -14,5 +14,7 @@ interface CryptoCurrenciesRepository {
     suspend fun getInformationTrading(book:String): Flow<Result<TradingInformationModel>>
 
     suspend fun getOrderBook(book:String): Flow<Result<OrderBookModel>>
+
+    fun getInformationTradingRXJ(book:String): Single<TradingInformationModel>
 
 }

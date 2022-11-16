@@ -1,6 +1,9 @@
 package wizeline.crypto.currency.data.repositories
 
 import android.util.Log
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.*
 import retrofit2.HttpException
 import wizeline.crypto.currency.data.resource.remote.CryptoCurrenciesApi
@@ -19,6 +22,7 @@ import wizeline.crypto.currency.data.resource.local.entities.toInformationModel
 import wizeline.crypto.currency.domain.model.*
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.coroutines.suspendCoroutine
 
 class CryptoCurrenciesRepositoryImp @Inject constructor(
     private val api: CryptoCurrenciesApi,
@@ -134,4 +138,22 @@ class CryptoCurrenciesRepositoryImp @Inject constructor(
                 ))
         }
     }
+
+
+
+    override fun getInformationTradingRXJ(book:String): Single<TradingInformationModel> {
+
+        return api.getInformationTradingRXJ(book).map { data->
+            data.convertToTradingInformation()}.doOnSuccess {
+                val tradingEntity= it.toInformationEntity()
+                informationTradingDao.insertInformationRXJ(tradingEntity)
+        }.subscribeOn(Schedulers.io())
+
+
+    }
+
+
+
+
+
 }
